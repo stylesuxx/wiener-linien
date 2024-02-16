@@ -1,0 +1,33 @@
+{
+  "name": "wiener-linien",
+  "version": "0.1.0",
+  "main": "index.js",
+  "author": "stylesuxx",
+  "license": "MIT",
+  "scripts": {
+    "bundle": "esbuild src/index.ts --outdir=bundle --sourcemap --bundle --platform=node --target=node20.09.0",
+    "clean": "rimraf dist",
+    "compile": "tsc",
+    "compile-watch": "tsc -w",
+    "dev": "nodemon --watch src --watch test --ext ts,json --exec 'yarn bundle && yarn start'",
+    "format": "prettier . --write",
+    "format-check": "prettier . --check",
+    "lint": "eslint . --fix",
+    "lint-check": "eslint .",
+    "start": "node --enable-source-maps ./bundle/index.js",
+    "test": "glob \"src/**/*.test.ts\" \"test/**\" -c \"tsx --test\""
+  },
+  "devDependencies": {
+    "@tsconfig/node20": "^20.1.2",
+    "@typescript-eslint/eslint-plugin": "^7.0.1",
+    "@typescript-eslint/parser": "^7.0.1",
+    "esbuild": "^0.20.0",
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^9.1.0",
+    "glob": "^10.3.10",
+    "nodemon": "^3.0.3",
+    "prettier": "^3.2.5",
+    "tsx": "^4.7.1",
+    "typescript": "^5.3.3"
+  }
+}
