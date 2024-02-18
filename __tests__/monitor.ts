@@ -1,4 +1,4 @@
-import RealtimeData from "../src/RealtimeData";
+import { RealtimeData } from "../src/index";
 import { ParameterInvalidError } from "../src/errors";
 import {
   MonitorResponseMonitor,

@@ -13,7 +13,7 @@ Access keys are not required, but their fair use policy states to keep requests 
 
 ## Installation
 
-Install with the packagemanager of your choice, package is available on [npm](https://www.npmjs.com/package/wiener-linien).
+Install with the packagemanager of your choice, package is available on [npm](https://www.npmjs.com/package/wiener-linien-api).
 
 ```
 yarn add wiener-linien-api
