@@ -6,12 +6,9 @@
   "author": "stylesuxx",
   "license": "MIT",
   "scripts": {
-    "publish": "",
-    "bundle": "esbuild src/index.ts --outdir=bundle --sourcemap --bundle --platform=node --target=node20.09.0",
     "clean": "rimraf dist",
     "compile": "tsc",
     "compile-watch": "tsc -w",
-    "dev": "nodemon --watch src --watch test --ext ts,json --exec 'yarn bundle && yarn start'",
     "format": "prettier . --write",
     "format-check": "prettier . --check",
     "lint": "eslint . --fix",

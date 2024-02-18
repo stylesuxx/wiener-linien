@@ -1,3 +1,5 @@
+![Tests](https://github.com/github/docs/actions/workflows/test.yml/badge.svg)
+
 # Wiener Linien API
 
 Wiener Linien provide a couple of different APIs du to the Open Data initiative of Vienna.
@@ -7,11 +9,11 @@ The goal of this library is to wrap all of those APIs in an easy to use way. Cur
 - [x] [Realtime departure data](https://www.wienerlinien.at/ogd_realtime/doku/ogd/wienerlinien-echtzeitdaten-dokumentation.pdf)
 - [ ] Routing
 
-Keys art not required, but their fair use policy states to keep requests at least 15 seconds apart. You will have to handle this, it is not done by the API Wrapper.
+Access keys are not required, but their fair use policy states to keep requests at least 15 seconds apart. You will have to handle this, it is not done by the API Wrapper.
 
 ## Usage
 
-All API endpoints are being wrapped by this library.
+All available API endpoints are being wrapped by this library.
 
 ### Realtime Data
 
