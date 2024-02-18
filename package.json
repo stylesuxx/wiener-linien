@@ -1,5 +1,5 @@
 {
-  "name": "wiener-linien",
+  "name": "wiener-linien-api",
   "description": "Typescript wrapper for Wiener Linien Realtime Data API",
   "version": "0.1.0",
   "main": "index.js",
