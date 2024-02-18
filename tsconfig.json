@@ -18,6 +18,6 @@
     "esm": true,
     "experimentalSpecifierResolution": "node"
   },
-  "include": ["src", "jest.config.js"],
+  "include": ["src", "__tests__", "jest.config.js"],
   "exclude": ["dist", "bundle", "node_modules"]
 }
