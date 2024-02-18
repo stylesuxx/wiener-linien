@@ -44,9 +44,11 @@ Get live departure data for one or more stations
 - stationId `number | Array<number>` - stationID(s) you are interested id
 - params `object` - Additional parameters to filter the results
 
-```
+```typescript
 {
-
+  diva?: number | Array<number>;
+  activateTrafficInfo?: string | Array<string>;
+  aArea?: BooleanNumber;
 }
 ```
 
@@ -56,8 +58,9 @@ Get live departure data for one or more stations
 import { RealtimeData } from "wiener-linien";
 
 const client = new RealtimeData();
-const single = client.monitor(1095);
-const multiple = client.monitor([1095, 1096]);
+
+let monitor = client.monitor(1095);
+monitor = client.monitor([1095, 1096]);
 ```
 
 #### getNewsList(params)
@@ -82,6 +85,7 @@ Get a list of news
 import { RealtimeData } from "wiener-linien";
 
 const client = new RealtimeData();
+
 const list = client.getNewsList();
 ```
 
@@ -99,8 +103,9 @@ Show news by their name
 import { RealtimeData } from "wiener-linien";
 
 const client = new RealtimeData();
-const single = client.getNews("news_1");
-const multiple = client.getNews(["news_1", "news_2"]);
+
+let list = client.getNews("news_1");
+list = client.getNews(["news_1", "news_2"]);
 ```
 
 #### getTrafficInfoList(params)
@@ -123,8 +128,8 @@ Get a list of traffic info items
 import { RealtimeData } from "wiener-linien";
 
 const client = new RealtimeData();
-let list = client.getTrafficInfoList();
 
+let list = client.getTrafficInfoList();
 list = client.getTrafficInfoList({
   relatedLine: ["U1", "U3"],
 });
@@ -144,6 +149,7 @@ Show traffic info items by their name
 import { RealtimeData } from "wiener-linien";
 
 const client = new RealtimeData();
+
 let result = client.getTrafficInfo("name_1");
 result = client.getTrafficInfo(["name_1", "name_2"]);
 ```
