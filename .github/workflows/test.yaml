@@ -1,6 +1,6 @@
-name: test codebase
+name: Test codebase
 
-on: [pull_request]
+on: [push, pull_request]
 
 jobs:
   test:

@@ -1,6 +1,6 @@
 name: Check for linting issues
 
-on: [pull_request]
+on: [push, pull_request]
 
 jobs:
   lint:
