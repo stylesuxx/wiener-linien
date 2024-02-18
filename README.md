@@ -1,4 +1,4 @@
-![Tests](https://github.com/github/docs/actions/workflows/test.yml/badge.svg)
+![Tests](https://github.com/stylesuxx/wiener-linien/actions/workflows/test.yml/badge.svg)
 
 # Wiener Linien API
 
@@ -27,9 +27,21 @@ The most convenient way I could find is this [text file](http://www.wienerlinien
 
 In this example `1095` is the stationId for **Reumannplatz**.
 
-#### monitor
+#### getMonitor(stationId, params)
 
 Get live departure data for one or more stations
+
+**Parameters:**
+
+- stationId `number | Array<number>` - stationID(s) you are interested id
+- params `object` - Additional parameters to filter the results
+```
+{
+
+}
+```
+
+**Examples:**
 
 ```javascript
 const client = new WienerLinien();
@@ -37,18 +49,63 @@ const single = client.monitor(1095);
 const multiple = client.monitor([1095, 1096]);
 ```
 
-#### newsList
+#### getNewsList(params)
 
 Get a list of news
 
+**Parameters:**
+
+**Examples:**
+
 ```javascript
 const client = new WienerLinien();
-const data = client.getNewsList();
+const list = client.getNewsList();
 ```
 
-#### news
+#### getNews(name)
 
 Show news by their name
+
+**Parameters:**
+
+-name `string | Array<string>` - The name of the news you are interested in
+
+**Examples:**
+
+```javascript
+const client = new WienerLinien();
+const single = client.getNews("news_1");
+const multiple = client.getNews(["news_1", "news_2"]);
+```
+
+#### getTrafficInfoList(params)
+
+Get a list of traffic info items
+
+**Parameters:**
+
+**Examples:**
+
+```javascript
+const client = new WienerLinien();
+const list = client.getTrafficInfoList();
+```
+
+#### getTrafficInfo(name)
+
+Show traffic info items by their name
+
+**Parameters:**
+
+-name `string | Array<string>` - The name of the traffic info you are interested in
+
+**Examples:**
+
+```javascript
+const client = new WienerLinien();
+const single = client.getTrafficInfo("name_1");
+const multiple = client.getTrafficInfo(["name_1", "name_2"]);
+```
 
 ## Interfaces
 
