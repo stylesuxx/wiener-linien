@@ -1,8 +1,16 @@
 type BooleanNumber = 0 | 1;
 
+type TrafficInfo =
+  | "stoerunglang"
+  | "stoerungkurz"
+  | "aufzugsinfo"
+  | "fahrtreppeninfo"
+  | "informationen";
+
 export interface MonitorParams {
+  stopId?: number | Array<number>;
   diva?: number | Array<number>;
-  activateTrafficInfo?: string | Array<string>;
+  activateTrafficInfo?: TrafficInfo | Array<TrafficInfo>;
   aArea?: BooleanNumber;
 }
 
