@@ -11,6 +11,10 @@ export interface MonitorParams {
   stopId?: number | Array<number>;
   diva?: number | Array<number>;
   activateTrafficInfo?: TrafficInfo | Array<TrafficInfo>;
+  /**
+   * If querying by stopId, this parameter can be used to query all other
+   * stops too that would resolve to the same DIVA.
+   */
   aArea?: BooleanNumber;
 }
 

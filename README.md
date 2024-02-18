@@ -57,7 +57,14 @@ import { RealtimeData } from "wiener-linien-api";
 const client = new RealtimeData();
 
 let monitor = client.getMonintor(60201095);
-monitor = client.getMonintor([60201040, 60201095]);
+monitor = await client.getMonintor([60201040, 60201095]);
+monitor await client.getMonitor(60201040, {
+  activateTrafficInfo: [
+    "fahrtreppeninfo",
+    "informationen",
+    "aufzugsinfo",
+  ],
+});
 ```
 
 #### getMonitorByStopId(stopId, params)
@@ -83,8 +90,8 @@ import { RealtimeData } from "wiener-linien-api";
 
 const client = new RealtimeData();
 
-let monitor = client.getMonintorByStopId(1095);
-monitor = client.getMonintorByStopId([1095, 1096]);
+let monitor = await client.getMonintorByStopId(1095);
+monitor = await client.getMonintorByStopId([1095, 1096]);
 ```
 
 #### getNewsList(params)
@@ -110,7 +117,7 @@ import { RealtimeData } from "wiener-linien-api";
 
 const client = new RealtimeData();
 
-const list = client.getNewsList();
+const list = await client.getNewsList();
 ```
 
 #### getNews(name)
@@ -128,8 +135,8 @@ import { RealtimeData } from "wiener-linien-api";
 
 const client = new RealtimeData();
 
-let list = client.getNews("news_1");
-list = client.getNews(["news_1", "news_2"]);
+let list = await client.getNews("news_1");
+list = await client.getNews(["news_1", "news_2"]);
 ```
 
 #### getTrafficInfoList(params)
@@ -155,8 +162,8 @@ import { RealtimeData } from "wiener-linien-api";
 
 const client = new RealtimeData();
 
-let list = client.getTrafficInfoList();
-list = client.getTrafficInfoList({
+let list = await client.getTrafficInfoList();
+list = await client.getTrafficInfoList({
   relatedLine: ["U1", "U3"],
 });
 ```
@@ -176,8 +183,8 @@ import { RealtimeData } from "wiener-linien-api";
 
 const client = new RealtimeData();
 
-let result = client.getTrafficInfo("name_1");
-result = client.getTrafficInfo(["name_1", "name_2"]);
+let result = await client.getTrafficInfo("name_1");
+result = await client.getTrafficInfo(["name_1", "name_2"]);
 ```
 
 ## Interfaces

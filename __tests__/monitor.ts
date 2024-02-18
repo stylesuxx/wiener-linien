@@ -67,15 +67,35 @@ describe("WienerLinien monitor", () => {
     expect(Array.isArray(data.monitors)).toBeTruthy();
   });
 
-  /*
-  // Invalid stationId will not trigger an error, instead the monitors
-  // will simply be empty
-  it("should throw error when stationId does not exist", async () => {
-    const client = new WienerLinien();
+  it("should get monitor data and trafficInfo by DIVA", async () => {
+    const client = new RealtimeData();
 
-    await expect(client.getMonitor(-500))
-      .rejects
-      .toThrow(MandatoryParameterMissingError);
+    // Praterstern
+    const data = await client.getMonitor(60201040, {
+      activateTrafficInfo: "fahrtreppeninfo",
+    });
+
+    expect(Array.isArray(data.monitors)).toBeTruthy();
   });
-  */
+
+  it("should get monitor data and multiple trafficInfo by DIVA", async () => {
+    const client = new RealtimeData();
+
+    // Praterstern
+    const data = await client.getMonitor(60201040, {
+      activateTrafficInfo: ["fahrtreppeninfo", "informationen", "aufzugsinfo"],
+    });
+
+    expect(Array.isArray(data.monitors)).toBeTruthy();
+  });
+
+  it("should get monitor data by stopId and include all related stopId data with aArea parameter", async () => {
+    const client = new RealtimeData();
+
+    const data = await client.getMonitorByStopId(309, {
+      aArea: 1,
+    });
+
+    expect(Array.isArray(data.monitors)).toBeTruthy();
+  });
 });
