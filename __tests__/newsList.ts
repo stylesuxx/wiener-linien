@@ -1,4 +1,4 @@
-import WienerLinien from "../src";
+import RealtimeData from "../src/RealtimeData";
 
 import { NewsListPoi } from "../src/interfaces/newsList";
 
@@ -10,7 +10,7 @@ describe("WienerLinien newsList", () => {
   }, 30000);
 
   it("should get a complete news list", async () => {
-    const client = new WienerLinien();
+    const client = new RealtimeData();
 
     const newsList = await client.getNewsList();
 
@@ -76,7 +76,7 @@ describe("WienerLinien newsList", () => {
   });
 
   it("should get a news list for U1", async () => {
-    const client = new WienerLinien();
+    const client = new RealtimeData();
 
     const newsList = await client.getNewsList({
       relatedLine: "U1",
@@ -87,7 +87,7 @@ describe("WienerLinien newsList", () => {
   });
 
   it("should get a news list for U1 and U4", async () => {
-    const client = new WienerLinien();
+    const client = new RealtimeData();
 
     const newsList = await client.getNewsList({
       relatedLine: ["U1", "U4"],
@@ -98,7 +98,7 @@ describe("WienerLinien newsList", () => {
   });
 
   it("should handle news list for non existant line", async () => {
-    const client = new WienerLinien();
+    const client = new RealtimeData();
 
     const newsList = await client.getNewsList({
       relatedLine: "666",
@@ -110,7 +110,7 @@ describe("WienerLinien newsList", () => {
   });
 
   it("should handle news list for a single related stop", async () => {
-    const client = new WienerLinien();
+    const client = new RealtimeData();
 
     const newsList = await client.getNewsList({
       relatedStop: 4401,
@@ -122,7 +122,7 @@ describe("WienerLinien newsList", () => {
   });
 
   it("should handle news list for multiple related stops", async () => {
-    const client = new WienerLinien();
+    const client = new RealtimeData();
 
     const newsList = await client.getNewsList({
       relatedStop: [4106, 4112],
@@ -133,7 +133,7 @@ describe("WienerLinien newsList", () => {
   });
 
   it("should handle news list for a specific category", async () => {
-    const client = new WienerLinien();
+    const client = new RealtimeData();
 
     const newsList = await client.getNewsList({
       name: "aufzugsservice",
@@ -144,7 +144,7 @@ describe("WienerLinien newsList", () => {
   });
 
   it("should handle news list for multiple categories", async () => {
-    const client = new WienerLinien();
+    const client = new RealtimeData();
 
     const newsList = await client.getNewsList({
       name: ["aufzugsservice", "Umleitungen"],
@@ -155,7 +155,7 @@ describe("WienerLinien newsList", () => {
   });
 
   it("should handle news list a combination of line and category", async () => {
-    const client = new WienerLinien();
+    const client = new RealtimeData();
 
     const newsList = await client.getNewsList({
       relatedLine: ["U1", "U4"],

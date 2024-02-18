@@ -1,4 +1,4 @@
-import WienerLinien from "../src";
+import RealtimeData from "../src/RealtimeData";
 import { ParameterInvalidError } from "../src/errors";
 import {
   MonitorResponseMonitor,
@@ -14,7 +14,7 @@ describe("WienerLinien monitor", () => {
   }, 30000);
 
   it("should throw error when stationId is missing", async () => {
-    const client = new WienerLinien();
+    const client = new RealtimeData();
 
     // @ts-expect-error: Argument of type 'null' is not assignable to parameter of type 'number'.
     await expect(client.getMonitor(null)).rejects.toThrow(
@@ -23,7 +23,7 @@ describe("WienerLinien monitor", () => {
   });
 
   it("should get monitor data", async () => {
-    const client = new WienerLinien();
+    const client = new RealtimeData();
 
     const data = await client.getMonitor(147);
 

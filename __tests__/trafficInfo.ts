@@ -1,4 +1,4 @@
-import WienerLinien from "../src";
+import RealtimeData from "../src/RealtimeData";
 
 describe("WienerLinien news", () => {
   afterEach(async () => {
@@ -8,7 +8,7 @@ describe("WienerLinien news", () => {
   }, 30000);
 
   it("should handle fetching none existant traffic info", async () => {
-    const client = new WienerLinien();
+    const client = new RealtimeData();
 
     const trafficInfo = await client.getTrafficInfo("INVALID");
 
@@ -17,7 +17,7 @@ describe("WienerLinien news", () => {
   });
 
   it("should handle fetching single traffic info", async () => {
-    const client = new WienerLinien();
+    const client = new RealtimeData();
 
     const trafficInfo = await client.getTrafficInfo("ivu_1776_463");
 
@@ -26,7 +26,7 @@ describe("WienerLinien news", () => {
   });
 
   it("should handle fetching multiple traffic infos", async () => {
-    const client = new WienerLinien();
+    const client = new RealtimeData();
 
     const trafficInfo = await client.getTrafficInfo([
       "ivu_1776_463",

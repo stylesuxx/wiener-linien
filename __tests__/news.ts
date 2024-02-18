@@ -1,4 +1,4 @@
-import WienerLinien from "../src";
+import RealtimeData from "../src/RealtimeData";
 
 describe("WienerLinien news", () => {
   afterEach(async () => {
@@ -8,7 +8,7 @@ describe("WienerLinien news", () => {
   }, 30000);
 
   it("should handle fetching single news", async () => {
-    const client = new WienerLinien();
+    const client = new RealtimeData();
 
     const news = await client.getNews("ftazW_97");
 
@@ -17,7 +17,7 @@ describe("WienerLinien news", () => {
   });
 
   it("should handle fetching multiple news", async () => {
-    const client = new WienerLinien();
+    const client = new RealtimeData();
 
     const news = await client.getNews(["ftazW_97", "ftazW_41"]);
 

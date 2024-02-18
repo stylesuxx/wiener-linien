@@ -1,4 +1,4 @@
-import WienerLinien from "../src";
+import RealtimeData from "../src/RealtimeData";
 
 describe("WienerLinien newsList", () => {
   afterEach(async () => {
@@ -8,7 +8,7 @@ describe("WienerLinien newsList", () => {
   }, 30000);
 
   it("should get a complete traffic info list", async () => {
-    const client = new WienerLinien();
+    const client = new RealtimeData();
 
     const trafficInfoList = await client.getTrafficInfoList();
 
@@ -17,7 +17,7 @@ describe("WienerLinien newsList", () => {
   });
 
   it("should handle traffic info list for invalid line", async () => {
-    const client = new WienerLinien();
+    const client = new RealtimeData();
 
     const trafficInfoList = await client.getTrafficInfoList({
       relatedLine: "666",
@@ -29,7 +29,7 @@ describe("WienerLinien newsList", () => {
   });
 
   it("should get a traffic info list for a single line", async () => {
-    const client = new WienerLinien();
+    const client = new RealtimeData();
 
     const trafficInfoList = await client.getTrafficInfoList({
       relatedLine: "U1",
@@ -40,7 +40,7 @@ describe("WienerLinien newsList", () => {
   });
 
   it("should get a traffic info list for multiple lines", async () => {
-    const client = new WienerLinien();
+    const client = new RealtimeData();
 
     const trafficInfoList = await client.getTrafficInfoList({
       relatedLine: ["U1", "U3"],
@@ -51,7 +51,7 @@ describe("WienerLinien newsList", () => {
   });
 
   it("should handle traffic info list for a single related stop", async () => {
-    const client = new WienerLinien();
+    const client = new RealtimeData();
 
     const trafficInfoList = await client.getTrafficInfoList({
       relatedStop: 4900,
@@ -62,7 +62,7 @@ describe("WienerLinien newsList", () => {
   });
 
   it("should handle traffic info list for multiple related stops", async () => {
-    const client = new WienerLinien();
+    const client = new RealtimeData();
 
     const trafficInfoList = await client.getTrafficInfoList({
       relatedStop: [4900, 4184],
@@ -73,7 +73,7 @@ describe("WienerLinien newsList", () => {
   });
 
   it("should handle traffic info list for a specific category", async () => {
-    const client = new WienerLinien();
+    const client = new RealtimeData();
 
     const trafficInfoList = await client.getTrafficInfoList({
       name: "aufzugsinfo",
@@ -84,7 +84,7 @@ describe("WienerLinien newsList", () => {
   });
 
   it("should handle traffic info list for multiple categories", async () => {
-    const client = new WienerLinien();
+    const client = new RealtimeData();
 
     const trafficInfoList = await client.getTrafficInfoList({
       name: ["aufzugsinfo", "stoerungkurz"],
@@ -95,7 +95,7 @@ describe("WienerLinien newsList", () => {
   });
 
   it("should handle traffic info list for a combination of line and category", async () => {
-    const client = new WienerLinien();
+    const client = new RealtimeData();
 
     const trafficInfoList = await client.getTrafficInfoList({
       relatedLine: "U1",
@@ -107,7 +107,7 @@ describe("WienerLinien newsList", () => {
   });
 
   it("should handle traffic info list for a combination of lines and categories", async () => {
-    const client = new WienerLinien();
+    const client = new RealtimeData();
 
     const trafficInfoList = await client.getTrafficInfoList({
       relatedLine: ["U1", "U3", "U4"],

@@ -11,6 +11,14 @@ The goal of this library is to wrap all of those APIs in an easy to use way. Cur
 
 Access keys are not required, but their fair use policy states to keep requests at least 15 seconds apart. You will have to handle this, it is not done by the API Wrapper.
 
+## Installation
+
+Install with the packagemanager of your choice, package is available on [npm](https://www.npmjs.com/package/wiener-linien).
+
+```
+yarn add wiener-linien
+```
+
 ## Usage
 
 All available API endpoints are being wrapped by this library.
@@ -45,7 +53,9 @@ Get live departure data for one or more stations
 **Examples:**
 
 ```javascript
-const client = new WienerLinien();
+import { RealtimeData } from "wiener-linien";
+
+const client = new RealtimeData();
 const single = client.monitor(1095);
 const multiple = client.monitor([1095, 1096]);
 ```
@@ -69,7 +79,9 @@ Get a list of news
 **Examples:**
 
 ```javascript
-const client = new WienerLinien();
+import { RealtimeData } from "wiener-linien";
+
+const client = new RealtimeData();
 const list = client.getNewsList();
 ```
 
@@ -84,7 +96,9 @@ Show news by their name
 **Examples:**
 
 ```javascript
-const client = new WienerLinien();
+import { RealtimeData } from "wiener-linien";
+
+const client = new RealtimeData();
 const single = client.getNews("news_1");
 const multiple = client.getNews(["news_1", "news_2"]);
 ```
@@ -106,7 +120,9 @@ Get a list of traffic info items
 **Examples:**
 
 ```javascript
-const client = new WienerLinien();
+import { RealtimeData } from "wiener-linien";
+
+const client = new RealtimeData();
 let list = client.getTrafficInfoList();
 
 list = client.getTrafficInfoList({
@@ -125,7 +141,9 @@ Show traffic info items by their name
 **Examples:**
 
 ```javascript
-const client = new WienerLinien();
+import { RealtimeData } from "wiener-linien";
+
+const client = new RealtimeData();
 let result = client.getTrafficInfo("name_1");
 result = client.getTrafficInfo(["name_1", "name_2"]);
 ```

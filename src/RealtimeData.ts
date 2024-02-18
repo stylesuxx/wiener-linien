@@ -48,7 +48,7 @@ type Response =
 
 type Params = MonitorParams | NewsListParams | TrafficInfoListParams;
 
-class WienerLinien {
+class RealtimeData {
   readonly apiURL = "https://www.wienerlinien.at/ogd_realtime/";
 
   /**
@@ -167,4 +167,4 @@ class WienerLinien {
   }
 }
 
-export default WienerLinien;
+export default RealtimeData;
