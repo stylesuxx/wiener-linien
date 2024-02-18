@@ -1,10 +1,14 @@
 {
   "name": "wiener-linien-api",
   "description": "Typescript wrapper for Wiener Linien Realtime Data API",
-  "version": "0.2.0",
-  "main": "src/index.js",
+  "version": "0.3.0",
+  "main": "dist/src/index.js",
   "author": "stylesuxx",
   "license": "MIT",
+  "repository": {
+    "url": "https://github.com/stylesuxx/wiener-linien-api",
+    "type": "git"
+  },
   "scripts": {
     "prepublish": "yarn clean && yarn compile",
     "clean": "rimraf dist",
