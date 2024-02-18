@@ -114,6 +114,8 @@ Get a list of traffic info items
 
 **Parameters:**
 
+- params `object` - Additional parameters to filter the results
+
 ```typescript
 {
   relatedLine?: string | Array<string>,
