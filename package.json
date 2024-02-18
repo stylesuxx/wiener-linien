@@ -1,7 +1,7 @@
 {
   "name": "wiener-linien-api",
   "description": "Typescript wrapper for Wiener Linien Realtime Data API",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "main": "src/index.js",
   "author": "stylesuxx",
   "license": "MIT",
