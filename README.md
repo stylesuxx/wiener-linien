@@ -1,4 +1,4 @@
-![Tests](https://github.com/stylesuxx/wiener-linien/actions/workflows/test.yml/badge.svg)
+![Tests](https://github.com/stylesuxx/wiener-linien/actions/workflows/test.yaml/badge.svg)
 
 # Wiener Linien API
 
@@ -35,6 +35,7 @@ Get live departure data for one or more stations
 
 - stationId `number | Array<number>` - stationID(s) you are interested id
 - params `object` - Additional parameters to filter the results
+
 ```
 {
 
@@ -55,6 +56,16 @@ Get a list of news
 
 **Parameters:**
 
+- params `object` - Additional parameters to filter the results
+
+```typescript
+{
+  relatedLine?: string | Array<string>,
+  relatedStop?: number | Array<number>,
+  name?: string | Array<string>,
+}
+```
+
 **Examples:**
 
 ```javascript
@@ -68,7 +79,7 @@ Show news by their name
 
 **Parameters:**
 
--name `string | Array<string>` - The name of the news you are interested in
+- name `string | Array<string>` - The name of the news you are interested in
 
 **Examples:**
 
@@ -84,11 +95,23 @@ Get a list of traffic info items
 
 **Parameters:**
 
+```typescript
+{
+  relatedLine?: string | Array<string>,
+  relatedStop?: number | Array<number>,
+  name?: string | Array<string>,
+}
+```
+
 **Examples:**
 
 ```javascript
 const client = new WienerLinien();
-const list = client.getTrafficInfoList();
+let list = client.getTrafficInfoList();
+
+list = client.getTrafficInfoList({
+  relatedLine: ["U1", "U3"],
+});
 ```
 
 #### getTrafficInfo(name)
@@ -103,8 +126,8 @@ Show traffic info items by their name
 
 ```javascript
 const client = new WienerLinien();
-const single = client.getTrafficInfo("name_1");
-const multiple = client.getTrafficInfo(["name_1", "name_2"]);
+let result = client.getTrafficInfo("name_1");
+result = client.getTrafficInfo(["name_1", "name_2"]);
 ```
 
 ## Interfaces
