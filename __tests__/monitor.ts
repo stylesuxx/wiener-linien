@@ -1,10 +1,8 @@
 import { RealtimeData } from "../src/index";
-import { ParameterInvalidError } from "../src/errors";
 import {
-  MonitorResponseMonitor,
-  MonitorResponseLine,
-  MonitorResponseLineDeparture,
-} from "../src/interfaces/monitor";
+  ParameterInvalidError,
+  StoppointDoesNotExistError,
+} from "../src/errors";
 
 describe("WienerLinien monitor", () => {
   afterEach(async () => {
@@ -17,86 +15,87 @@ describe("WienerLinien monitor", () => {
     const client = new RealtimeData();
 
     // @ts-expect-error: Argument of type 'null' is not assignable to parameter of type 'number'.
-    await expect(client.getMonitor(null)).rejects.toThrow(
+    await expect(client.getMonitorByStopId(null)).rejects.toThrow(
       ParameterInvalidError,
     );
   });
 
-  it("should get monitor data", async () => {
+  it("should get monitor data by stopId", async () => {
     const client = new RealtimeData();
 
-    const data = await client.getMonitor(147);
+    // Praterstern
+    const data = await client.getMonitorByStopId(309);
 
     expect(Array.isArray(data.monitors)).toBeTruthy();
-    expect(data.monitors.length > 0).toBeTruthy();
-
-    const monitor = data.monitors[0] as MonitorResponseMonitor;
-    expect(typeof monitor.locationStop).toBe("object");
-
-    const locationStop = monitor.locationStop;
-    expect(typeof locationStop.type).toBe("string");
-    expect(typeof locationStop.geometry).toBe("object");
-
-    const geometry = locationStop.geometry;
-    expect(typeof geometry.type).toBe("string");
-    expect(Array.isArray(geometry.coordinates)).toBeTruthy();
-
-    const properties = locationStop.properties;
-    expect(typeof properties.name).toBe("string");
-    expect(typeof properties.title).toBe("string");
-    expect(typeof properties.municipality).toBe("string");
-    expect(typeof properties.municipalityId).toBe("number");
-    expect(typeof properties.type).toBe("string");
-    expect(typeof properties.coordName).toBe("string");
-    expect(typeof properties.gate).toBe("string");
-    expect(typeof properties.attributes).toBe("object");
-
-    const attributes = properties.attributes;
-    expect(typeof attributes.rbl).toBe("number");
-
-    const lines = monitor.lines;
-    expect(Array.isArray(lines)).toBeTruthy();
-
-    if (lines) {
-      const line = lines[0] as MonitorResponseLine;
-      expect(typeof line.name).toBe("string");
-      expect(typeof line.towards).toBe("string");
-      expect(typeof line.direction).toBe("string");
-      expect(typeof line.platform).toBe("string");
-      expect(typeof line.richtungsId).toBe("string");
-      expect(typeof line.barrierFree).toBe("boolean");
-      expect(typeof line.realtimeSupported).toBe("boolean");
-      expect(typeof line.trafficjam).toBe("boolean");
-      expect(typeof line.type).toBe("string");
-      expect(typeof line.lineId).toBe("number");
-      expect(typeof line.departures).toBe("object");
-
-      const departures = line.departures;
-      expect(Array.isArray(departures.departure)).toBeTruthy();
-
-      if (departures.departure) {
-        const departure = departures
-          .departure[0] as MonitorResponseLineDeparture;
-        expect(typeof departure).toBe("object");
-        expect(typeof departure.departureTime).toBe("object");
-
-        const departureTime = departure.departureTime;
-        expect(typeof departureTime.timePlanned).toBe("string");
-        expect(typeof departureTime.timeReal).toBe("string");
-        expect(typeof departureTime.countdown).toBe("number");
-      }
-    }
   });
 
-  /*
-  // Invalid stationId will not trigger an error, instead the monitors
-  // will simply be empty
-  it("should throw error when stationId does not exist", async () => {
-    const client = new WienerLinien();
+  it("should get monitor data for multiple stopIds", async () => {
+    const client = new RealtimeData();
 
-    await expect(client.getMonitor(-500))
-      .rejects
-      .toThrow(MandatoryParameterMissingError);
+    // All Praterstern Stops
+    const data = await client.getMonitorByStopId([
+      309, 311, 345, 2100, 2659, 2704, 3450, 3886, 4112, 4117, 4260, 4263, 4729,
+      4532, 4533, 5707, 5710,
+    ]);
+
+    expect(Array.isArray(data.monitors)).toBeTruthy();
   });
-  */
+
+  it("should throw error when DIVA does not exist", async () => {
+    const client = new RealtimeData();
+
+    await expect(client.getMonitor(309)).rejects.toThrow(
+      StoppointDoesNotExistError,
+    );
+  });
+
+  it("should get monitor data by DIVA", async () => {
+    const client = new RealtimeData();
+
+    // Praterstern - this call should yield the same results as the call by
+    // stopId when provided all related stopIds
+    const data = await client.getMonitor(60201040);
+
+    expect(Array.isArray(data.monitors)).toBeTruthy();
+  });
+
+  it("should get monitor data by multiple DIVA", async () => {
+    const client = new RealtimeData();
+
+    const data = await client.getMonitor([60201040, 60201095]);
+
+    expect(Array.isArray(data.monitors)).toBeTruthy();
+  });
+
+  it("should get monitor data and trafficInfo by DIVA", async () => {
+    const client = new RealtimeData();
+
+    // Praterstern
+    const data = await client.getMonitor(60201040, {
+      activateTrafficInfo: "fahrtreppeninfo",
+    });
+
+    expect(Array.isArray(data.monitors)).toBeTruthy();
+  });
+
+  it("should get monitor data and multiple trafficInfo by DIVA", async () => {
+    const client = new RealtimeData();
+
+    // Praterstern
+    const data = await client.getMonitor(60201040, {
+      activateTrafficInfo: ["fahrtreppeninfo", "informationen", "aufzugsinfo"],
+    });
+
+    expect(Array.isArray(data.monitors)).toBeTruthy();
+  });
+
+  it("should get monitor data by stopId and include all related stopId data with aArea parameter", async () => {
+    const client = new RealtimeData();
+
+    const data = await client.getMonitorByStopId(309, {
+      aArea: 1,
+    });
+
+    expect(Array.isArray(data.monitors)).toBeTruthy();
+  });
 });

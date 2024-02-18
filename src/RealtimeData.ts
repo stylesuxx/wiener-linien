@@ -124,13 +124,26 @@ class RealtimeData {
   }
 
   public async getMonitor(
+    diva: number | Array<number>,
+    params?: MonitorParams,
+  ): Promise<MonitorResponse> {
+    const path = "monitor";
+    const allParams = {
+      ...params,
+      diva,
+    };
+
+    return (await this.get(path, allParams)) as MonitorResponse;
+  }
+
+  public async getMonitorByStopId(
     stopId: number | Array<number>,
     params?: MonitorParams,
   ): Promise<MonitorResponse> {
     const path = "monitor";
     const allParams = {
-      stopId,
       ...params,
+      stopId,
     };
 
     return (await this.get(path, allParams)) as MonitorResponse;

@@ -25,28 +25,25 @@ All available API endpoints are being wrapped by this library.
 
 ### Realtime Data
 
-This API relies on the knowledge of the `stopId` or multiple stop IDs for that matter.
+This API relies on the knowledge of the `stopId` or multiple stop IDs for that matter or the `DIVA`.
 
-The most convenient way I could find is this [text file](http://www.wienerlinien.at/ogd_realtime/doku/ogd/gtfs/stops.txt) containing stops and geodata for their entries. What we are interested in, is the 4 digit number from the first column:
+Querying data by `DIVA` is the prefered method since it will return data for all stops withing this `DIVA`.
 
-```
-"at:49:1095:0:11","Reumannplatz U","48.1746757017068","16.3775991720935","0100"
-```
+> For example: Praterstern has 17 `stopIds` related to it which can all be queryied by just one `DIVA`.
 
-In this example `1095` is the stationId for **Reumannplatz**.
+The most convenient way I could find is this [CSV file](https://www.wienerlinien.at/ogd_realtime/doku/ogd/wienerlinien-ogd-haltepunkte.csv) containing stops with their stopId and DIVA numbers.
 
-#### getMonitor(stationId, params)
+#### getMonitor(diva, params)
 
 Get live departure data for one or more stations
 
 **Parameters:**
 
-- stationId `number | Array<number>` - stationID(s) you are interested id
-- params `object` - Additional parameters to filter the results
+- diva `number | Array<number>` - DIVA(s) you are interested id
+- params `object` - Optional additional parameters to filter the results
 
 ```typescript
 {
-  diva?: number | Array<number>;
   activateTrafficInfo?: string | Array<string>;
   aArea?: BooleanNumber;
 }
@@ -55,12 +52,46 @@ Get live departure data for one or more stations
 **Examples:**
 
 ```javascript
-import { RealtimeData } from "wiener-linien";
+import { RealtimeData } from "wiener-linien-api";
 
 const client = new RealtimeData();
 
-let monitor = client.monitor(1095);
-monitor = client.monitor([1095, 1096]);
+let monitor = client.getMonintor(60201095);
+monitor = await client.getMonintor([60201040, 60201095]);
+monitor await client.getMonitor(60201040, {
+  activateTrafficInfo: [
+    "fahrtreppeninfo",
+    "informationen",
+    "aufzugsinfo",
+  ],
+});
+```
+
+#### getMonitorByStopId(stopId, params)
+
+Get live departure data for one or more stations
+
+**Parameters:**
+
+- stationId `number | Array<number>` - stationID(s) you are interested id
+- params `object` - Optional additional parameters to filter the results
+
+```typescript
+{
+  activateTrafficInfo?: string | Array<string>;
+  aArea?: BooleanNumber;
+}
+```
+
+**Examples:**
+
+```javascript
+import { RealtimeData } from "wiener-linien-api";
+
+const client = new RealtimeData();
+
+let monitor = await client.getMonintorByStopId(1095);
+monitor = await client.getMonintorByStopId([1095, 1096]);
 ```
 
 #### getNewsList(params)
@@ -69,7 +100,7 @@ Get a list of news
 
 **Parameters:**
 
-- params `object` - Additional parameters to filter the results
+- params `object` - Optional additional parameters to filter the results
 
 ```typescript
 {
@@ -82,11 +113,11 @@ Get a list of news
 **Examples:**
 
 ```javascript
-import { RealtimeData } from "wiener-linien";
+import { RealtimeData } from "wiener-linien-api";
 
 const client = new RealtimeData();
 
-const list = client.getNewsList();
+const list = await client.getNewsList();
 ```
 
 #### getNews(name)
@@ -100,12 +131,12 @@ Show news by their name
 **Examples:**
 
 ```javascript
-import { RealtimeData } from "wiener-linien";
+import { RealtimeData } from "wiener-linien-api";
 
 const client = new RealtimeData();
 
-let list = client.getNews("news_1");
-list = client.getNews(["news_1", "news_2"]);
+let list = await client.getNews("news_1");
+list = await client.getNews(["news_1", "news_2"]);
 ```
 
 #### getTrafficInfoList(params)
@@ -114,7 +145,7 @@ Get a list of traffic info items
 
 **Parameters:**
 
-- params `object` - Additional parameters to filter the results
+- params `object` - Optional additional parameters to filter the results
 
 ```typescript
 {
@@ -127,12 +158,12 @@ Get a list of traffic info items
 **Examples:**
 
 ```javascript
-import { RealtimeData } from "wiener-linien";
+import { RealtimeData } from "wiener-linien-api";
 
 const client = new RealtimeData();
 
-let list = client.getTrafficInfoList();
-list = client.getTrafficInfoList({
+let list = await client.getTrafficInfoList();
+list = await client.getTrafficInfoList({
   relatedLine: ["U1", "U3"],
 });
 ```
@@ -148,12 +179,12 @@ Show traffic info items by their name
 **Examples:**
 
 ```javascript
-import { RealtimeData } from "wiener-linien";
+import { RealtimeData } from "wiener-linien-api";
 
 const client = new RealtimeData();
 
-let result = client.getTrafficInfo("name_1");
-result = client.getTrafficInfo(["name_1", "name_2"]);
+let result = await client.getTrafficInfo("name_1");
+result = await client.getTrafficInfo(["name_1", "name_2"]);
 ```
 
 ## Interfaces
@@ -175,3 +206,4 @@ Tests are a bit naive and we are only testing for valid responses, not checking 
 Resources:
 
 - https://www.data.gv.at/katalog/dataset/wiener-linien-echtzeitdaten-via-datendrehscheibe-wien
+- https://till.mabe.at/rbl/
